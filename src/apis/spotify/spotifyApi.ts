@@ -1,3 +1,6 @@
+// Spotify API
+// https://developer.spotify.com/documentation/web-api/reference/#/
+
 import { SpotifyTrack } from "./models";
 
 let accessToken: string;
@@ -88,21 +91,32 @@ const addTracksToPlaylist = async (
     userId: string,
     playlistId: string,
     trackUris: string[]
-): Promise<void> => {
-    fetch(`${SPOTIFY_API}/v1/users/${userId}/playlists/${playlistId}/tracks`, {
-        headers: getHeaders(),
-        method: "POST",
-        body: JSON.stringify({ uris: trackUris }),
-    });
+): Promise<string> => {
+    return fetch(
+        `${SPOTIFY_API}/v1/users/${userId}/playlists/${playlistId}/tracks`,
+        {
+            headers: getHeaders(),
+            method: "POST",
+            body: JSON.stringify({ uris: trackUris }),
+        }
+    )
+        .then((response) => response.json())
+        .then((jsonResponse) => {
+            return jsonResponse.id;
+        });
 };
 
-const savePlaylist = async (name: string, trackUris: string[]) => {
+const savePlaylist = async (
+    name: string,
+    trackUris: string[]
+): Promise<string | undefined> => {
     if (!name || !trackUris.length) {
         return;
     }
     const userId = await getUserId();
     const playlistId = await createPlaylist(name, userId);
-    await addTracksToPlaylist(userId, playlistId, trackUris);
+    const snapshotId = await addTracksToPlaylist(userId, playlistId, trackUris);
+    return snapshotId;
 };
 
 export const spotifyApi = {
