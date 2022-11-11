@@ -1,6 +1,7 @@
 // Spotify API
 // https://developer.spotify.com/documentation/web-api/reference/#/
 
+import PlaylistTrack from "../../models/PlaylistTrack";
 import { SpotifyTrack } from "./models";
 
 let accessToken: string;
@@ -43,7 +44,7 @@ const getHeaders = () => {
     return { Authorization: `Bearer ${accessToken}` };
 };
 
-const search = async (term: string) => {
+const search = async (term: string): Promise<PlaylistTrack[]> => {
     return fetch(`${SPOTIFY_API}/v1/search?type=track&q=${term}`, {
         headers: getHeaders(),
     })

@@ -6,6 +6,7 @@ import TrackList from "../TrackList/TrackList";
 import PlaylistTrack from "../../models/PlaylistTrack";
 
 interface PlaylistProps {
+    playlistName: string;
     onRemove: (track: PlaylistTrack) => void;
     onNameChange: (name: string) => void;
     playlistTracks: PlaylistTrack[];
@@ -17,11 +18,13 @@ export const Playlist: FC<PlaylistProps> = ({
     onNameChange,
     onSave,
     playlistTracks,
+    playlistName,
 }) => {
     return (
         <div className="Playlist">
             <input
                 defaultValue={"New Playlist"}
+                value={playlistName}
                 onChange={(event) => onNameChange(event.target.value)}
             />
             <TrackList onRemove={onRemove} isRemoval tracks={playlistTracks} />
