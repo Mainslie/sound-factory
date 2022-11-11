@@ -7,7 +7,7 @@ import PlaylistTrack from "../../models/PlaylistTrack";
 
 interface TrackListProps {
     isRemoval: boolean;
-    onAdd: (track: PlaylistTrack) => void;
+    onAdd?: (track: PlaylistTrack) => void;
     onRemove?: (track: PlaylistTrack) => void;
     tracks: PlaylistTrack[];
 }

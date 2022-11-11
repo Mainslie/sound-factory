@@ -7,7 +7,7 @@ import TrackButton from "./TrackButton";
 interface TrackProps {
     track: PlaylistTrack;
     isRemoval: boolean;
-    onAdd: (track: PlaylistTrack) => void;
+    onAdd?: (track: PlaylistTrack) => void;
     onRemove?: (track: PlaylistTrack) => void;
 }
 
@@ -22,7 +22,11 @@ const Track: FC<TrackProps> = ({ track, isRemoval, onAdd, onRemove }) => {
             </div>
             <TrackButton
                 isRemoval={isRemoval}
-                add={() => onAdd(track)}
+                add={() => {
+                    if (onAdd) {
+                        onAdd(track);
+                    }
+                }}
                 remove={() => {
                     if (onRemove) {
                         onRemove(track);
