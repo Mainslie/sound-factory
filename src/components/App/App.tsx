@@ -1,7 +1,7 @@
-import React from "react";
+import React, { FC } from "react";
 import "./App.css";
 
-function App() {
+const App: FC = () => {
     return (
         <div>
             <h1>
@@ -25,6 +25,6 @@ function App() {
             </div>
         </div>
     );
-}
+};
 
 export default App;
