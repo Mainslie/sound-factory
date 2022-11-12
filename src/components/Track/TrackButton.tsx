@@ -1,5 +1,4 @@
 import { FC } from "react";
-import "./Track.css";
 
 interface TrackButtonProps {
     isRemoval: boolean;

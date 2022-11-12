@@ -13,12 +13,10 @@ const App: FC = () => {
     const [playlistTracks, setPlaylistTracks] = useState<PlaylistTrack[]>([]);
 
     const addTrack = (track: PlaylistTrack) => {
-        let tracks = playlistTracks;
-        if (tracks.find((savedTrack) => savedTrack.id === track.id)) {
+        if (playlistTracks.find((savedTrack) => savedTrack.id === track.id)) {
             return;
         }
-        tracks.push(track);
-        setPlaylistTracks(tracks);
+        setPlaylistTracks([...playlistTracks, track]);
     };
 
     const removeTrack = (track: PlaylistTrack) => {
@@ -39,7 +37,7 @@ const App: FC = () => {
         });
     };
 
-    const search = (term: string) => {
+    const search = async (term: string) => {
         spotifyApi.search(term).then((searchResults) => {
             setSearchResults(searchResults);
         });

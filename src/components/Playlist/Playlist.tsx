@@ -23,7 +23,6 @@ export const Playlist: FC<PlaylistProps> = ({
     return (
         <div className="Playlist">
             <input
-                defaultValue={"New Playlist"}
                 value={playlistName}
                 onChange={(event) => onNameChange(event.target.value)}
             />

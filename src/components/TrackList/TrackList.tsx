@@ -21,10 +21,10 @@ const TrackList: FC<TrackListProps> = ({
     <div className="TrackList">
         {tracks.map((track) => (
             <Track
+                key={track.id}
                 onRemove={onRemove}
                 isRemoval={isRemoval}
                 onAdd={onAdd}
-                key={track.id}
                 track={track}
             />
         ))}
