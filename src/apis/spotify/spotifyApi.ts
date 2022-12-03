@@ -10,7 +10,6 @@ const SPOTIFY_API = "https://api.spotify.com";
 
 const authorize = () => {
     const redirectUri = (window as Window).location.href;
-    console.log(redirectUri);
     const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
     (window as Window).location = accessUrl;
 };
