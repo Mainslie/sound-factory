@@ -17,12 +17,23 @@ const App: FC = () => {
             return;
         }
         setPlaylistTracks([...playlistTracks, track]);
+
+        let results = searchResults;
+        results = results.filter(
+            (currentTrack) => currentTrack.id !== track.id
+        );
+        setSearchResults(results);
     };
 
     const removeTrack = (track: PlaylistTrack) => {
         let tracks = playlistTracks;
         tracks = tracks.filter((currentTrack) => currentTrack.id !== track.id);
         setPlaylistTracks(tracks);
+
+        if (searchResults.find((savedTrack) => savedTrack.id === track.id)) {
+            return;
+        }
+        setSearchResults([track, ...searchResults]);
     };
 
     const updatePlaylistName = (name: string) => {
